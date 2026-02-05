@@ -38,95 +38,60 @@
         .video-section video {
             max-width: 100%;
             height: auto;
+            max-height: 80vh;
+        }
+
+        .plyr--video, .plyr__video-wrapper, .plyr__poster {
+            background: transparent;
         }
     </style>
 
 </head>
 
 <body>
-    <div class="owl-carousel video-section">
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/P2Y90yw7/passerelle-part-2-v2-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/keTwE5Gb/cabinet-medical-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/pOtgUetR/source-de-st-apolline-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/mSw67MQz/hopital-de-jour-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/2QZJHhAM/carrefour-courtesoupe-et-lavoir-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/WgdjkzD8/nouveau-chemin-de-randonnee-passerelle-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/gV60zUnC/parking-rue-courtesoupe-v2-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/OSMfEOIG/publication-11_-rue-de-paradis-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="item">
-            <div>
-                <video class="js-player" crossorigin playsinline>
-                    <source src="https://videos.files.wordpress.com/9JKMk0CP/publication-8_-le-vieux-saint-augustin-bd.mp4"
-                        type="video/mp4">
-                </video>
-            </div>
-        </div>
-    </div>
+    <div class="owl-carousel video-section"></div>
 </body>
 
 <script type="text/javascript">
 
+    // Array of video URLs
+    const videoUrls = [
+        "https://videos.files.wordpress.com/P2Y90yw7/passerelle-part-2-v2-bd.mp4",
+        "https://videos.files.wordpress.com/keTwE5Gb/cabinet-medical-bd.mp4",
+        "https://videos.files.wordpress.com/pOtgUetR/source-de-st-apolline-bd.mp4",
+        "https://videos.files.wordpress.com/mSw67MQz/hopital-de-jour-bd.mp4",
+        "https://videos.files.wordpress.com/2QZJHhAM/carrefour-courtesoupe-et-lavoir-bd.mp4",
+        "https://videos.files.wordpress.com/WgdjkzD8/nouveau-chemin-de-randonnee-passerelle-bd.mp4",
+        "https://videos.files.wordpress.com/gV60zUnC/parking-rue-courtesoupe-v2-bd.mp4",
+        "https://videos.files.wordpress.com/OSMfEOIG/publication-11_-rue-de-paradis-bd.mp4",
+        "https://videos.files.wordpress.com/9JKMk0CP/publication-8_-le-vieux-saint-augustin-bd.mp4"
+    ];
+
+    // Function to create video players from the array
+    function createVideoPlayers() {
+        const videoSection = $('.video-section');
+
+        videoUrls.forEach(function (url) {
+            const videoItem = `
+                <div class="item">
+                    <div>
+                        <video class="js-player" crossorigin playsinline>
+                            <source src="${url}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            `;
+            videoSection.append(videoItem);
+        });
+    }
+
     function debug_init() {
+        // Create video players from array
+        createVideoPlayers();
         $('.owl-carousel').owlCarousel({
-            stagePadding: 200,
+            // stagePadding: 200,
             loop: true,
-            margin: 10,
+            // margin: 10,
             items: 1,
             nav: true,
             responsive: {
@@ -188,12 +153,7 @@
             });
         });
     }
-
-
-    setTimeout(function () {
-        console.log('init')
-        debug_init()
-    }, 1000)
+    debug_init()
 
 
 </script>
