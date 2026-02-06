@@ -41,8 +41,15 @@
             max-height: 80vh;
         }
 
-        .plyr--video, .plyr__video-wrapper, .plyr__poster {
+        .plyr--video,
+        .plyr__video-wrapper,
+        .plyr__poster {
             background: transparent;
+            /* background-color: green; */
+        }
+
+        video {
+            /* background-color: red; */
         }
     </style>
 
@@ -127,20 +134,31 @@
         })
 
         var playerSettings = {
+            // enabled: true,
             controls: ['play-large'],
             fullscreen: { enabled: false },
             resetOnEnd: true,
             hideControls: true,
             clickToPlay: true,
             keyboard: false,
+            // playsinline: true,
+            // muted: false,
+            debug: true,
         }
 
         const players = Plyr.setup('.js-player', playerSettings);
 
         players.forEach(function (instance, index) {
+            // Force load first frame
+            instance.media.load();
+            instance.muted = true;
+
             instance.on('play', function () {
+                console.log('play', instance)
+                instance.muted = false;
                 players.forEach(function (instance1, index1) {
                     if (instance != instance1) {
+                        console.log('pause', instance1)
                         instance1.pause();
                     }
                 });
